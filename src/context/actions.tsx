@@ -1,0 +1,12 @@
+//AZIONI DEL REDUCER
+
+//azione per mischiare useEffect e useReducer
+export const DATA_FETCHING_STARTED = "DATA_FETCHING_STARTED"
+export const DATA_FETCHING_SUCCESS = "DATA_FETCHING_SUCCESS"
+export const DATA_FETCHING_FAIL = "DATA_FETCHING_FAIL"
+export const DELETE_ITEMS = "DELETE_ITEMS"
+export const SVUOTA_CARRELLO = "SVUOTA_CARRELLO"
+export const AUMENTA_QTY = "AUMENTA_QTY"
+export const DIMINUISCI_QTY = "DIMINUISCI_QTY"
+export const COSTO_TOTALE = "COSTO_TOTALE"
+export const CONTATORE = "CONTATORE"
