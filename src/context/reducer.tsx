@@ -5,42 +5,43 @@ import { DATA_FETCHING_FAIL, DATA_FETCHING_STARTED, DATA_FETCHING_SUCCESS, DELET
 
 
 
-const reducer = (state:InitialState, {type, payload}:Action):InitialState =>{
+const reducer = (state: InitialState, action: Action): InitialState =>{
+
     //se actionetypeè log di prova, in caso torna lo state e muta il payload!!!!
-    if(type===DATA_FETCHING_STARTED){
+    if(action.type===DATA_FETCHING_STARTED){
         return {...state, isLoading:true}
     }
-    if(type===DATA_FETCHING_SUCCESS){
-        return {...state, isLoading:false, isError:false, products: payload.map((el)=>{
+    if(action.type===DATA_FETCHING_SUCCESS){
+        return {...state, isLoading:false, isError:false, products: action.payload.map((el)=>{
             return {...el, qty:1}
         })}
     }
-    if(type===DATA_FETCHING_FAIL){
+    if(action.type===DATA_FETCHING_FAIL){
         return {...state, isLoading:false, isError:true}
     }
-    if(type===DELETE_ITEMS){
-        return {...state, products: state.products.filter(el => el._id !== payload)}
+    if(action.type===DELETE_ITEMS){
+        return {...state, products: state.products.filter(el => el._id !== action.payload)}
     }
-    if(type===SVUOTA_CARRELLO){
+    if(action.type===SVUOTA_CARRELLO){
         return {...state, products: []}
     }
-    if(type===AUMENTA_QTY){
+    if(action.type===AUMENTA_QTY){
         return {...state, products: state.products.map(el=>{
-            if (payload === el._id){
+            if (action.payload === el._id){
                 return {...el, qty: el.qty +1}
             }
             return{...el}
         })}
     }
-    if(type===DIMINUISCI_QTY){
+    if(action.type===DIMINUISCI_QTY){
         return {...state, products: state.products.map(el=>{
-            if (payload === el._id){
+            if (action.payload === el._id){
                 return {...el, qty: el.qty - 1}
             }
             return{...el}
         })}
     }
-    if(type===COSTO_TOTALE){
+    if(action.type===COSTO_TOTALE){
         return {
             //REDUCE
             ...state, total: state.products.reduce((total, item)=>{
@@ -48,7 +49,7 @@ const reducer = (state:InitialState, {type, payload}:Action):InitialState =>{
             },0)
         }
     }
-    if(type===CONTATORE){
+    if(action.type===CONTATORE){
         return {
             //REDUCE
             ...state, itemCounter: state.products.reduce((total, item)=>{

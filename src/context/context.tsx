@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useReducer} from "react"
 import reducer from "./reducer"
 import { DATA_FETCHING_FAIL, DATA_FETCHING_STARTED, DATA_FETCHING_SUCCESS, DELETE_ITEMS, SVUOTA_CARRELLO, AUMENTA_QTY, DIMINUISCI_QTY, COSTO_TOTALE, CONTATORE } from "./actions"
 import axios from "axios"
-import type { ContextType } from "../type"
+import type { AppProviderProps, ContextType } from "../type"
 
 const url = "https://cart-api-fm7s.onrender.com/products"
 
@@ -22,7 +22,7 @@ const AppContext = React.createContext<ContextType | null>(null)
 
 
 
-const AppProvider = ({children}:any) => {
+const AppProvider = ({children}:AppProviderProps) => {
     //gestione useReducer carrello:
 const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -60,6 +60,7 @@ useEffect(()=>{
             dispatch({type:DATA_FETCHING_SUCCESS, payload:response.data})
         }catch(error){
             dispatch({type:DATA_FETCHING_FAIL})
+            console.log(error)
         }
     })()
 },[])

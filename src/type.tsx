@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { DATA_FETCHING_STARTED, DATA_FETCHING_SUCCESS, DELETE_ITEMS, SVUOTA_CARRELLO, DATA_FETCHING_FAIL, AUMENTA_QTY, DIMINUISCI_QTY, COSTO_TOTALE, CONTATORE } from "./context/actions";
 
 export type Products = {
@@ -36,3 +37,7 @@ export type ContextType = InitialState & {
     dimQty: (_id: string) => void;
     deleteAll: () => void;
 }
+
+export type AppProviderProps = {
+  children: ReactNode;
+};
